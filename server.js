@@ -37,10 +37,8 @@ function sendData(request, response) {
 // Post Route
 const data = [];
 app.post('/', function (request, response) {
-  // console.log(request.body)
   data.push(request.body);
-  projectData['data'] = data
-  console.log(projectData, 'done');
+  projectData['data'] = data;
   response.send('POST recieved');
 });
 
