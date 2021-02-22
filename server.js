@@ -27,10 +27,20 @@ const server = app.listen(port, listening);
 
 
 // Initialize all route with a callback function
+app.get('/all', sendData);
 
 // Callback function to complete GET '/all'
+function sendData(request, response) {
+  response.send(projectData);
+}
 
 // Post Route
-  
-
+const data = [];
+app.post('/', function (request, response) {
+  // console.log(request.body)
+  data.push(request.body);
+  projectData['data'] = data
+  console.log(projectData, 'done');
+  response.send('POST recieved');
+});
 
