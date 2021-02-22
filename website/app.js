@@ -7,7 +7,6 @@ document.getElementById('generate').addEventListener('click', performAction);
 /* Function called by event listener */
 function performAction (){
   const zipCode = document.getElementById('zip').value;
-  // const countryCode = document.getElementById('country').value;
   const feeling = document.getElementById('feelings').value;
 
   getWeather(apiKey, zipCode)
@@ -17,6 +16,7 @@ function performAction (){
     .then(function(){
       updateUI();
     })
+    clearUI();
 }
 
 /* Function to GET Web API Data*/
@@ -28,7 +28,6 @@ async function getWeather (apiKey, zipCode){
   } catch(error) {
     console.log('error', error)
   }
-
 }
 
 /* Function to POST data */
@@ -48,7 +47,7 @@ async function postData ( url = '', data = {}) {
     console.log(newData);
     return newData;
   }catch(error) {
-  console.log("error", error);
+    console.log("error", error);
   }
 }
 
@@ -58,15 +57,29 @@ async function updateUI() {
   const response = await fetch('/all');
   try {
       const newData = await response.json();
-      console.log(newData.data);
-      for (let i = 0; i <=newData.data.length; i++) {
-        document.getElementById('temp').innerHTML = newData.data[i].temp
-        document.getElementById('content').innerHTML = newData.data[i].feeling
-      }
-  
-      // return newData;
+      const dataArray = newData.data
+      const recentEntry = dataArray.pop();
+      const date = getDate();
+
+      document.getElementById('date').innerHTML = date;
+      document.getElementById('location').innerHTML = recentEntry.country;
+      document.getElementById('temp').innerHTML = recentEntry.temp;
+      document.getElementById('feels_like').innerHTML = recentEntry.feels_like;
+      document.getElementById('content').innerHTML = recentEntry.feeling;
+      
   } catch(error) {
       console.log('error', error);
+      document.getElementById('error').innerHTML = 'Data unavailabe for that zipcode'
   }
 }
  
+function getDate() {
+  let d = new Date();
+  let newDate = d.getMonth()+1 +'.'+ d.getDate()+'.'+ d.getFullYear();
+  return newDate;
+}
+
+function clearUI() {
+  document.getElementById('zip').value = '';
+  document.getElementById('feelings').value = '';
+}
