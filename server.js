@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.static('website'));
 
 // Spin up the server
-const port = 8000;
+const port = process.env.PORT || 8000;
 // Callback to debug
 const listening = () => {
   console.log('server running');
