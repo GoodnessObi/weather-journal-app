@@ -6,6 +6,7 @@ This project is an asynchronous web app that uses a [weather web api](https://op
 
 ## Installation
 Ensure you have [node](https://nodejs.org/en/) installed on your local device
+
 Clone the repository and install the node packages
 ```
 //locally
@@ -21,6 +22,7 @@ http://localhost:8000/
 ## Usage
 
 Deployed on the web [here](https://weatherjournal-app.herokuapp.com/)
+
 Put in values in the input fields and clicking the generate button. The date, temperature, what the day actually feels like :) and your feelings are returned.
 
 ## License
