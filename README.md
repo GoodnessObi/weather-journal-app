@@ -14,7 +14,7 @@ Get an api key from the [weather web api](https://openweathermap.org/) used - th
 //locally
 git clone https://github.com/GoodnessObi/weather-journal-app.git
 ```
-* Input it on the first line in the `website/app.js` file
+* Input the api key on the first line in the `website/app.js` file
 ```
 const apiKey = '***...';
 ```
