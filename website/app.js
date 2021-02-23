@@ -8,25 +8,30 @@ document.getElementById('generate').addEventListener('click', performAction);
 function performAction (){
   const zipCode = document.getElementById('zip').value;
   const feeling = document.getElementById('feelings').value;
-
+  
+  clearRecentEntry();
   getWeather(apiKey, zipCode)
     .then(function(data) {
       postData('/', {...data, feeling})
     })
     .then(function(){
       updateUI();
+    }).then(function() {
+      clearInputFields();
     })
-    clearUI();
+    .catch(function(error) {
+      document.getElementById('error').innerHTML = error.message;
+    })
 }
 
 /* Function to GET Web API Data*/
 async function getWeather (apiKey, zipCode){
-  const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?zip=${zipCode}&appid=${apiKey}`)
   try {
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${zipCode}&appid=${apiKey}`)
     const data = await response.json();
     return {temp: data.main.temp, feels_like: data.main.feels_like, country: data.name};
   } catch(error) {
-    console.log('error', error)
+    throw new Error('Data unavailabe for that zipcode');
   }
 }
 
@@ -47,7 +52,7 @@ async function postData ( url = '', data = {}) {
     console.log(newData);
     return newData;
   }catch(error) {
-    console.log("error", error);
+    throw new Error('Server error')
   }
 }
 
@@ -69,7 +74,6 @@ async function updateUI() {
       
   } catch(error) {
       console.log('error', error);
-      document.getElementById('error').innerHTML = 'Data unavailabe for that zipcode'
   }
 }
  
@@ -79,7 +83,16 @@ function getDate() {
   return newDate;
 }
 
-function clearUI() {
+function clearInputFields() {
   document.getElementById('zip').value = '';
   document.getElementById('feelings').value = '';
+}
+
+function clearRecentEntry() {
+  document.getElementById('date').innerHTML = '';
+  document.getElementById('location').innerHTML = '';
+  document.getElementById('temp').innerHTML = '';
+  document.getElementById('feels_like').innerHTML = '';
+  document.getElementById('content').innerHTML = '';
+  document.getElementById('error').innerHTML = '';
 }
