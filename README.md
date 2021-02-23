@@ -22,8 +22,8 @@ const apiKey = '***...';
 ```
 npm install
 npm start
-
-Open your local browser and verify the weather-journal-app is working by accessing
+```
+* Open your local browser and verify the weather-journal-app is working by accessing
 ```
 http://localhost:8000/
 ```
