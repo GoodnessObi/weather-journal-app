@@ -1,5 +1,2 @@
-# ignoring the js folder as it contains alternative starter code option
-js/
-
 # ignoring node modules
 node_modules/
