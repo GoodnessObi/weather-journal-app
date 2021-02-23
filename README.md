@@ -23,7 +23,7 @@ http://localhost:8000/
 
 Deployed on the web [here](https://weatherjournal-app.herokuapp.com/)
 
-Put in values in the input fields and clicking the generate button. The date, temperature, what the day actually feels like :) and your feelings are returned.
+Put in values in the input fields and click the generate button. The date, temperature, what the day actually feels like :) and your feelings are returned.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
