@@ -12,12 +12,12 @@ function performAction (){
   clearRecentEntry();
   getWeather(apiKey, zipCode)
     .then(function(data) {
-      postData('/', {...data, feeling})
+      return postData('/', {...data, feeling})
     })
     .then(function(){
-      updateUI();
+      return updateUI();
     }).then(function() {
-      clearInputFields();
+      return clearInputFields();
     })
     .catch(function(error) {
       document.getElementById('error').innerHTML = error.message;
@@ -29,7 +29,7 @@ async function getWeather (apiKey, zipCode){
   try {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${zipCode}&appid=${apiKey}`)
     const data = await response.json();
-    return {temp: data.main.temp, feels_like: data.main.feels_like, country: data.name};
+    return {temp: data.main.temp, feels: data.main.feels_like, country: data.name};
   } catch(error) {
     throw new Error('Data unavailabe for that zipcode');
   }
@@ -37,7 +37,7 @@ async function getWeather (apiKey, zipCode){
 
 /* Function to POST data */
 async function postData ( url = '', data = {}) {
-    const response = await fetch(url, {
+  const response = await fetch(url, {
     method: 'POST', 
     credentials: 'same-origin',
     headers: {
@@ -47,13 +47,7 @@ async function postData ( url = '', data = {}) {
     body: JSON.stringify(data), 
   });
 
-  try {
-    const newData = await response.json();
-    console.log(newData);
-    return newData;
-  }catch(error) {
-    throw new Error('Server error')
-  }
+  return response;
 }
 
 
@@ -69,7 +63,7 @@ async function updateUI() {
       document.getElementById('date').innerHTML = date;
       document.getElementById('location').innerHTML = recentEntry.country;
       document.getElementById('temp').innerHTML = recentEntry.temp;
-      document.getElementById('feels_like').innerHTML = recentEntry.feels_like;
+      document.getElementById('feels').innerHTML = recentEntry.feels;
       document.getElementById('content').innerHTML = recentEntry.feeling;
       
   } catch(error) {
@@ -92,7 +86,7 @@ function clearRecentEntry() {
   document.getElementById('date').innerHTML = '';
   document.getElementById('location').innerHTML = '';
   document.getElementById('temp').innerHTML = '';
-  document.getElementById('feels_like').innerHTML = '';
+  document.getElementById('feels').innerHTML = '';
   document.getElementById('content').innerHTML = '';
   document.getElementById('error').innerHTML = '';
 }
