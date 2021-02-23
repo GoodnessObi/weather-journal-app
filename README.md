@@ -7,22 +7,28 @@ This project is an asynchronous web app that uses a [weather web api](https://op
 ## Installation
 Ensure you have [node](https://nodejs.org/en/) installed on your local device
 
-Clone the repository and install the node packages
+Get an api key from the [weather web api](https://openweathermap.org/) used - this would require creating an account
+
+* Clone the repository 
 ```
 //locally
 git clone https://github.com/GoodnessObi/weather-journal-app.git
+```
+* Input it on the first line in the `website/app.js` file
+```
+const apiKey = '***...';
+```
+* Install the node packages
+```
 npm install
 npm start
-```
+
 Open your local browser and verify the weather-journal-app is working by accessing
 ```
 http://localhost:8000/
 ```
 
 ## Usage
-
-Deployed on the web [here](https://weatherjournal-app.herokuapp.com/)
-
 Put in values in the input fields and click the generate button. The date, your location, the temperature, what the day actually feels like :) and your feelings are returned.
 
 ## License
