@@ -1,5 +1,5 @@
 // Personal API Key for OpenWeatherMap API
-const apiKey = 'ebbd2f57d5cadca45a8ea3aa17c0b066';
+const apiKey = '&appid=ebbd2f57d5cadca45a8ea3aa17c0b066&units=imperial';
 
 // Event listener to add function to existing HTML DOM element
 document.getElementById('generate').addEventListener('click', performAction);
@@ -27,7 +27,7 @@ function performAction (){
 /* Function to GET Web API Data*/
 async function getWeather (apiKey, zipCode){
   try {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${zipCode}&appid=${apiKey}`)
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${zipCode}${apiKey}`)
     const data = await response.json();
     return {temp: data.main.temp, feels: data.main.feels_like, country: data.name};
   } catch(error) {
