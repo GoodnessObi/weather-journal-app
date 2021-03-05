@@ -9,10 +9,11 @@ Ensure you have [node](https://nodejs.org/en/) installed on your local device
 
 Get an api key from the [weather web api](https://openweathermap.org/) used - this would require creating an account
 
+* Fork the repository to create a version on your account
 * Clone the repository 
 ```
 //locally
-git clone https://github.com/GoodnessObi/weather-journal-app.git
+git clone https://github.com/<Your Github Username>/weather-journal-app.git
 ```
 * Input the api key on the first line in the `website/app.js` file
 ```
